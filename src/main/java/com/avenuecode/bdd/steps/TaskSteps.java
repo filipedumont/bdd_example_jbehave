@@ -1,6 +1,7 @@
 package com.avenuecode.bdd.steps;
 
 import com.avenuecode.bdd.pages.HomePage;
+import com.avenuecode.bdd.pages.PageSupport;
 import org.jbehave.core.annotations.Alias;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.When;
@@ -11,21 +12,22 @@ import org.jbehave.core.annotations.When;
  */
 public class TaskSteps {
 
-    public HomePage homePage;
+   private final PageSupport pages;
 
-    public TaskSteps(){
-        this.homePage = new HomePage();
+    public TaskSteps(PageSupport pages){
+        this.pages = pages;
     }
 
     @Given("user is on $page")
     @Alias("I am on $page")
     public void userIsOnPage(String page) {
-        homePage.navigateToPage();
+        if("HomePage".equals(page))
+            pages.homePage().navigateToPage();
     }
 
-    @When("user authenticates on system with $username and $password")
+ /*   @When("user authenticates on system with $username and $password")
     public void whenUserAuthenticatesOnSystemWithUsernameAndPassword(String username, String password) {
         homePage.signInWithUser(username, password);
     }
-
+*/
 }
